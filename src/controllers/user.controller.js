@@ -117,9 +117,10 @@ const loginUser = asyncHandler( async (req, res) => {
     // send cookie
 
     const {email, username, password} = req.body
+    
 
-    if (!username || !email) {
-        throw new (400, "username or email is required")
+    if (!(username || email)) {
+        throw new ApiError(400, "username or email is required")
     }
 
     const user = await User.findOne({
@@ -127,13 +128,13 @@ const loginUser = asyncHandler( async (req, res) => {
     })
 
     if(!user){
-        throw new (400, "user does not exist")
+        throw new ApiError(400, "user does not exist")
     }
 
     const isPasswordValid = await user.isPasswordCorrect(password)
 
     if(!isPasswordValid){
-        throw new (400, "password is not correct")
+        throw new ApiError(400, "password is not correct")
     }
 
     const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(user._id)
