@@ -9,8 +9,8 @@ import { Video } from "../models/video.model.js";
 // for uplode video file
 const uploadVideo = asyncHandler(async(req, res) => {
     const {title, description} = req.body;
-    console.log("FILES:", req.files);
-    console.log("BODY:", req.body);
+    // console.log("FILES:", req.files);
+    // console.log("BODY:", req.body);
 
     if(!title || !description){
         throw new ApiError(400, "Title and Description are required");

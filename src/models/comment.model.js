@@ -15,7 +15,14 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
+    },
+    // NEW FIELD (for nested replies)
+    parent: {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+        default: null
     }
+
 }, { timestamps: true });
 
 export const Comment = mongoose.model("Comment", commentSchema);
