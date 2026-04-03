@@ -16,6 +16,7 @@ const commentSchema = new Schema({
         ref: "User",
         required: true
     },
+
     // NEW FIELD (for nested replies)
     parent: {
         type: Schema.Types.ObjectId,
