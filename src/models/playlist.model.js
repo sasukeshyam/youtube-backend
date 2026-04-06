@@ -1,5 +1,5 @@
 import mongoose, {Schema} from "mongoose";
-import { User } from "./user.model";
+import { User } from "./user.model.js";
 
 const playlistSchema = new Schema({
     name: {
@@ -9,6 +9,7 @@ const playlistSchema = new Schema({
     },
     description: {
         type: String,
+        trim: true,
         default: ""
     },
     videos: [
