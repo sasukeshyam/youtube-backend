@@ -35,8 +35,13 @@ const videoSchema = new Schema({
         type: Schema.Types.ObjectId,  //cloudinary url
         ref: "User"
     },
+    
 
 }, {timestamps: true})
 
 videoSchema.plugin(mongooseAggregatePaginate)
+
+// Add text index at the bottom of video.model.js
+videoSchema.index({ title: "text", description: "text" });
+
 export const Video = mongoose.model("Video", videoSchema)
