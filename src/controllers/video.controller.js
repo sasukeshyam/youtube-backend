@@ -4,9 +4,9 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { Video } from "../models/video.model.js";
-import { Subscription } from "../models/subscription.model.js";        // ✅ added
-import { Notification } from "../models/notification.model.js";        // ✅ added
-import { io, onlineUsers } from "../app.js";                           // ✅ added
+import { Subscription } from "../models/subscription.model.js";        
+import { Notification } from "../models/notification.model.js";        
+import { io, onlineUsers } from "../app.js";                           
 
 // Upload video
 const uploadVideo = asyncHandler(async (req, res) => {
@@ -144,7 +144,7 @@ const updateVideo = asyncHandler(async (req, res) => {
     );
 
     return res.status(200).json(
-        new ApiResponse(200, updatedVideo, "Video updated successfully")  // ✅ was returning old video
+        new ApiResponse(200, updatedVideo, "Video updated successfully")  //  was returning old video
     );
 });
 
@@ -158,11 +158,11 @@ const deleteVideo = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Video not found");
     }
 
-    if (video.owner.toString() !== req.user._id.toString()) {  // ✅ added () to toString
+    if (video.owner.toString() !== req.user._id.toString()) {  //  added () to toString
         throw new ApiError(403, "Unauthorized");
     }
 
-    await video.deleteOne();  // ✅ was Video.deleteOne() with no filter
+    await video.deleteOne();  //  was Video.deleteOne() with no filter
 
     return res.status(200).json(
         new ApiResponse(200, {}, "Video deleted successfully")
@@ -179,11 +179,11 @@ const togglePublish = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Video not found");
     }
 
-    if (video.owner.toString() !== req.user._id.toString()) {  // ✅ added () to toString
+    if (video.owner.toString() !== req.user._id.toString()) {  // added () to toString
         throw new ApiError(403, "Unauthorized");
     }
 
-    video.isPublished = !video.isPublished;  // ✅ was !== instead of = !
+    video.isPublished = !video.isPublished;  //  was !== instead of = !
     await video.save();
 
     return res.status(200).json(

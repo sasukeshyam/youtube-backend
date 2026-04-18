@@ -6,10 +6,10 @@ import { Server } from "socket.io"
 
 const app = express()
 
-// ✅ Wrap express in http server
+//  Wrap express in http server
 const httpServer = createServer(app)
 
-// ✅ Attach socket.io
+//  Attach socket.io
 const io = new Server(httpServer, {
     cors: {
         origin: process.env.CORS_ORIGIN,
@@ -17,7 +17,7 @@ const io = new Server(httpServer, {
     }
 })
 
-// ✅ Store online users — { userId: socketId }
+//  Store online users — { userId: socketId }
 const onlineUsers = new Map()
 
 io.on("connection", (socket) => {
@@ -57,7 +57,7 @@ import likeRouter from './routes/like.route.js'
 import subscriptionRouter from './routes/subscription.routes.js'
 import playlistRouter from './routes/playlist.routes.js'
 import dashboardRouter from './routes/dashboard.routes.js'
-import notificationRouter from './routes/notification.routes.js'  // ✅ added
+import notificationRouter from './routes/notification.routes.js'  
 
 // Routes declaration
 app.use("/api/v1/users", userRouter)
@@ -67,7 +67,7 @@ app.use("/api/v1/likes", likeRouter)
 app.use("/api/v1/subscriptions", subscriptionRouter)
 app.use("/api/v1/playlists", playlistRouter)
 app.use("/api/v1/dashboards", dashboardRouter)
-app.use("/api/v1/notifications", notificationRouter)  // ✅ added
+app.use("/api/v1/notifications", notificationRouter)  
 
-// ✅ Export httpServer instead of app, plus io and onlineUsers
+// Export httpServer instead of app, plus io and onlineUsers
 export { app, httpServer, io, onlineUsers }
